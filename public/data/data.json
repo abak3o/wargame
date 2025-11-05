@@ -1,0 +1,22 @@
+{
+  "1": {
+    "title": "最初の投稿",
+    "author": "Taro",
+    "body": "<p>これは <code>/public/data/data.json</code> から取得した最初の投稿です。</p><p>HTMLタグもそのまま挿入できます。</p>"
+  },
+  "2": {
+    "title": "2番目の投稿",
+    "author": "Hanako",
+    "body": "<ul><li>HTMLRewriter</li><li>D1</li><li>Cloudflare Pages</li></ul>"
+  },
+  "hello": {
+    "title": "こんにちは、世界！",
+    "author": "Cloudflare",
+    "body": "<p>IDは数字である必要はありません。</p><p><code>/post/hello</code> でアクセスできます。</p>"
+  },
+  "日本語": {
+    "title": "日本語もいけます",
+    "author": "Cloudflare",
+    "body": "<p>IDは数字である必要はありません。</p><p><code>/post/hello</code> でアクセスできます。</p>"
+  }
+}

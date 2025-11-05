@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- ↓ ここは書き換えられます ↓ -->
+  <title>テンプレートのタイトル</title>
+  
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main>
+    <!-- ↓ ここは書き換えられます ↓ -->
+    <h1 id="post-title">読み込み中...</h1>
+    
+    <p>
+      著者: <span id="post-author">不明</span>
+    </p>
+
+    <!-- ↓ ここは書き換えられます ↓ -->
+    <div id="post-body">
+      <p>コンテンツを読み込んでいます...</p>
+    </div>
+    
+    <hr>
+    <a href="/">ホームに戻る</a>
+  </main>
+
+
+      <!-- ★ ここからがGemini API連携フォーム ★ -->
+    <div class="gemini-container">
+      <h3>Gemini に質問する</h3>
+      <p>この記事の内容（または何でも）について質問できます。</p>
+      <textarea id="gemini-prompt" rows="4" placeholder="プロンプトを入力してください..."></textarea>
+      <button id="gemini-submit">Geminiに送信</button>
+      
+      <h4>回答:</h4>
+      <div id="gemini-result">
+        <p>ここに回答が表示されます...</p>
+      </div>
+    </div>
+    <!-- ★ ここまで ★ -->
+</body>
+<script src="/template.js"></script>
+</html>
