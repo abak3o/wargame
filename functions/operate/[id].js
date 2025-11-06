@@ -1,6 +1,8 @@
 // Minimal, robust renderer for /operate/[id]
 // - Tries to fetch /data/operate.json and /data/operate_questions.json from the static origin.
 // - If those are missing, falls back to a tiny sample article so the function never fails at build time.
+// TODO:
+// css を書く
 export async function onRequest(context) {
   const { id } = context.params || {};
   const origin = new URL(context.request.url).origin;
@@ -31,7 +33,6 @@ export async function onRequest(context) {
   }
 
   if (!article) {
-    // fallback minimal article so page still renders
     article = {
       id: id || '1',
       title: `Operate ${id || 'sample'}`,
@@ -62,42 +63,44 @@ function escapeHtml(s) {
     .replace(/'/g, '&#039;');
 }
 
+
 function buildPageHtml(article, questions) {
   const qsHtml = (questions || []).length
     ? (questions || []).map(q => `
-      <section class="question" data-qid="${escapeHtml(q.id)}">
-        <h3>${escapeHtml(q.title || '問')}</h3>
-        <div>${escapeHtml(q.content || '')}</div>
-        <textarea id="q_${escapeHtml(q.id)}" rows="4" style="width:100%"></textarea>
-      </section>
-    `).join('\n')
+      <section class="question" data-qid="${escapeHtml(q.id)}">
+        <h3>${escapeHtml(q.title || '問')}</h3>
+        <div>${escapeHtml(q.content || '')}</div>
+                <textarea id="q_${escapeHtml(q.id)}" rows="4"></textarea>
+      </section>
+    `).join('\n')
     : '<p>設問はありません。</p>';
 
-  return `<!doctype html>
+  const html = `<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>${escapeHtml(article.title || 'No Title')}</title>
-  <link rel="stylesheet" href="/style.css">
-</head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>${escapeHtml(article.title || 'No Title')}</title>
+  <link rel="stylesheet" href="/style.css"> </head>
 <body>
-  <main style="max-width:800px;margin:24px auto;padding:0 16px;">
-    <h1>${escapeHtml(article.title)}</h1>
-    <div class="meta">作成者: ${escapeHtml(article.author)} </div>
-    <article class="body" style="white-space:pre-wrap;">${escapeHtml(article.body)}</article>
+    <main class="article-container">
+    <h1>${escapeHtml(article.title)}</h1>
+    <div class="meta">作成者: ${escapeHtml(article.author)} </div>
+        <article class="body">${escapeHtml(article.body)}</article>
 
-    <h2>設問</h2>
-    ${qsHtml}
+    <h2>設問</h2>
+    ${qsHtml}
 
-    <div style="margin-top:1.5em;">
-      <p><button id="submit-answers">回答を送信する</button></p>
-      <div id="form-result" aria-live="polite" style="border:1px solid #eee;padding:12px;background:#fafafa">ここに送信結果が表示されます</div>
-    </div>
+        <div class="submit-section">
+      <p><button id="submit-answers">回答を送信する</button></p>
+            <div id="form-result" aria-live="polite" ...>ここに送信結果が表示されます</div>
+    </div>
 
-    <p><a href="/">ホームへ戻る</a></p>
-  </main>
-  <script src="/js/gemini-form.js"></script>
+    <p><a href="/">ホームへ戻る</a></p>
+  </main>
+  <script src="/js/gemini-form.js"></script>
 </body>
 </html>`;
+
+  return html;
 }
