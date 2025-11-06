@@ -1,48 +1,22 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cloudflare Pages Test</title>
   <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
   <main>
-    <h1>静的ページ (index.html)</h1>
-    <p>これは /public/index.html です。</p>
-    
-    <p>↓のリンクをクリックすると、Functionsが動きます。</p>
-    <ul>
-      <li><a href="/operate/123">/operate/123 をテスト</a></li>
-      <li><a href="/operate/hello-world">/operate/hello-world をテスト</a></li>
-    </ul>
-
-    <p>
-      <input type="text" id="dynamic-input" placeholder="好きなIDを入力...">
-      <button id="go-button">Go</button>
-    </p>
+    <section id="cards" aria-label="投稿一覧">
+      <h2>Operate</h2>
+      <div id="cards-container"></div>
+    </section>
   </main>
 
-    <main>
-    <h1>HTMLRewriter デモ</h1>
-    <p>これは <code>/public/index.html</code> です。</p>
-    <p>以下のリンクをクリックすると、<code>/functions/post/[id].js</code> が実行されます。</p>
-    
-    <ul>
-      <li><a href="/post/1">投稿 1 を見る</a></li>
-      <li><a href="/post/2">投稿 2 を見る</a></li>
-      <li><a href="/post/hello">投稿 "hello" を見る</a></li>
-      <li><a href="/post/999">存在しない投稿 (404)</a></li>
-    </ul>
-    
-    <p>
-      このデモは、<code>/public/data/data.json</code> からデータを読み込み、
-      <code>/public/template.html</code> の雛形に
-      <code>HTMLRewriter</code> を使ってデータを挿入しています。
-    </p>
-  </main>
-
-  <!-- /public/script.js を読み込みます -->
   <script src="/script.js"></script>
 </body>
+
 </html>

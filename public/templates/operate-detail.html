@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    main { max-width: 800px; margin: 24px auto; padding: 0 16px; }
+    .meta { color: #666; font-size: 0.9em }
+    .question { border-top: 1px solid #eee; padding: 12px 0 }
+    .gemini-container { 
+      margin-top: 2em; 
+      padding: 1em; 
+      border-top: 1px solid #eee;
+      background: #f9f9f9;
+      border-radius: 4px;
+    }
+    #gemini-input {
+      width: 100%;
+      min-height: 100px;
+      margin: 1em 0;
+      padding: 0.5em;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    #gemini-button {
+      padding: 0.5em 1em;
+      background: #4a5568;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #gemini-button:disabled {
+      background: #cbd5e0;
+      cursor: not-allowed;
+    }
+    #gemini-output {
+      margin-top: 1em;
+      padding: 1em;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>{{title}}</h1>
+    <div class="meta">作成者: {{author}} | 公開: {{is_published}}</div>
+    <article class="body">{{body}}</article>
+
+    <h2>設問</h2>
+    {{questions}}
+
+    <div id="form-area">
+      <p>
+        <button id="submit-answers">回答を送信する</button>
+      </p>
+      <div id="form-result" aria-live="polite"></div>
+    </div>
+
+    <!-- Gemini Integration -->
+    <div class="gemini-container">
+      <h3>AIに質問する</h3>
+      <p>この記事の内容について、AIに質問できます。</p>
+      <textarea id="gemini-input" placeholder="質問を入力してください..."></textarea>
+      <button id="gemini-button">送信</button>
+      <div id="gemini-output">
+        <p>ここに回答が表示されます...</p>
+      </div>
+    </div>
+
+    <p><a href="/">ホームへ戻る</a></p>
+  </main>
+  <script>
+    // 回答送信の処理
+    (function() {
+      const btn = document.getElementById('submit-answers');
+      const result = document.getElementById('form-result');
+      btn.addEventListener('click', async function(e) {
+        e.preventDefault();
+        btn.disabled = true;
+        result.textContent = '送信中...';
+        try {
+          const qsEls = Array.from(document.querySelectorAll('.question'));
+          const answers = qsEls.map(el => {
+            const qid = el.getAttribute('data-qid');
+            const ta = document.getElementById('q_' + qid);
+            return { question_id: qid, answer: ta ? ta.value.trim() : '' };
+          }).filter(a => a.answer.length > 0);
+
+          const payload = {
+            operate_id: '{{id}}',
+            operate_external: '{{external_id}}',
+            submitted_at: new Date().toISOString(),
+            answers
+          };
+
+          const origin = window.location.origin;
+          const res = await fetch(origin + '/api/answers', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) throw new Error('送信に失敗しました: ' + res.status);
+          const data = await res.json();
+          result.textContent = '送信完了。サーバー応答: ' + (data.message || 'OK');
+          qsEls.forEach(el => {
+            const qid = el.getAttribute('data-qid');
+            const ta = document.getElementById('q_' + qid);
+            if (ta) ta.value = '';
+          });
+        } catch (err) {
+          result.textContent = String(err.message || err);
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    })();
+
+    // Gemini APIの処理
+    (function() {
+      const button = document.getElementById('gemini-button');
+      const input = document.getElementById('gemini-input');
+      const output = document.getElementById('gemini-output');
+
+      button.onclick = function() {
+        const content = document.querySelector('.body').textContent;
+        const question = input.value.trim();
+
+        if (!question) {
+          output.innerHTML = "<p style='color:red'>質問を入力してください</p>";
+          return;
+        }
+
+        button.disabled = true;
+        output.innerHTML = "<p>回答を生成中...</p>";
+
+        fetch('/api/gemini', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            prompt: "Content:\n" + content + "\n\nQuestion:\n" + question
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          output.innerHTML = (data.responseText || '').replace(/\n/g, '<br>');
+        })
+        .catch(error => {
+          output.innerHTML = "<p style='color:red'>エラー: " + error.message + "</p>";
+        })
+        .finally(() => {
+          button.disabled = false;
+        });
+      };
+    })();
+  </script>
+</body>
+</html>

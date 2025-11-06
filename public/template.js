@@ -14,10 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (submitButton) {
     submitButton.addEventListener('click', async () => {
       const prompt = promptTextarea.value;
+      // 入力内容をコンソールに出力
+      console.log('Geminiフォーム送信内容:', prompt);
       if (!prompt) {
         resultDiv.innerHTML = "<p style='color: red;'>プロンプトを入力してください。</p>";
         return;
       }
+
+      // FIXME:
+      // 入力テキストを加工
+      const processedPrompt = `以下の内容について、分かりやすく説明してください：\n\n${prompt}`;
+      console.log('加工後の送信内容:', processedPrompt);
 
       // ボタンを無効化し、ローディング表示
       submitButton.disabled = true;
@@ -30,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const response = await fetch('/api/gemini', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt: prompt }),
+          body: JSON.stringify({ prompt: processedPrompt }),
         });
 
         if (!response.ok) {

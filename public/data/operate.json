@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "title": "戦略シミュレーションA：初期段階",
+    "body": "これは最初の作戦概要です。利用可能なリソースと当面の脅威を分析し、初期の行動計画を立案してください。",
+    "settings": {
+      "difficulty": "medium",
+      "category": "シミュレーション"
+    },
+    "is_published": 1,
+    "created_at": "2025-11-01T00:00:00Z",
+    "updated_at": "2025-11-01T00:00:00Z",
+    "author_id": 102
+  },
+  {
+    "id": 2,
+    "title": "高度戦略分析：敵情評価",
+    "body": "敵軍の配置、兵站能力、および想定される作戦意図について詳細な分析を行ってください。不確実な情報源も評価対象とします。",
+    "settings": {
+      "difficulty": "advanced",
+      "category": "戦略シミュレーション"
+    },
+    "is_published": 1,
+    "created_at": "2025-11-02T00:00:00Z",
+    "updated_at": "2025-11-02T00:00:00Z",
+    "author_id": 103
+  },
+  {
+    "id": 3,
+    "title": "基礎データ分析：市場動向",
+    "body": "過去5年間の市場データを分析し、主要なトレンドと異常値を特定してください。簡単なレポートを作成します。",
+    "settings": {
+      "difficulty": "easy",
+      "category": "分析"
+    },
+    "is_published": 0,
+    "created_at": "2025-11-03T00:00:00Z",
+    "updated_at": "2025-11-03T00:00:00Z",
+    "author_id": 102
+  },
+  {
+    "id": 4,
+    "title": "中期経営計画の策定",
+    "body": "3カ年の中期経営計画を策定します。主要なKPI、リソース配分、およびリスク管理計画を含めてください。",
+    "settings": {
+      "difficulty": "medium",
+      "category": "計画"
+    },
+    "is_published": 1,
+    "created_at": "2025-11-04T00:00:00Z",
+    "updated_at": "2025-11-04T00:00:00Z",
+    "author_id": 104
+  },
+  {
+    "id": 5,
+    "title": "物流ネットワークの最適化",
+    "body": "現在の配送ネットワークにおけるボトルネックを特定し、コスト削減と配送時間短縮のための最適化案を提示してください。",
+    "settings": {
+      "difficulty": "advanced",
+      "category": "物流"
+    },
+    "is_published": 1,
+    "created_at": "2025-11-05T00:00:00Z",
+    "updated_at": "2025-11-05T00:00:00Z",
+    "author_id": 105
+  },
+  {
+    "id": 6,
+    "title": "倫理的ジレンマの検討",
+    "body": "提示されたシナリオにおける倫理的な問題点を特定し、異なる視点からの是非を議論してください。",
+    "settings": {
+      "difficulty": "easy",
+      "category": "倫理"
+    },
+    "is_published": 0,
+    "created_at": "2025-11-06T00:00:00Z",
+    "updated_at": "2025-11-06T00:00:00Z",
+    "author_id": 103
+  },
+  {
+    "id": 7,
+    "title": "外交交渉シミュレーション",
+    "body": "あなたはA国の交渉担当者です。B国との間で係争中の領土問題について、双方にとって受諾可能な妥協点を探ってください。",
+    "settings": {
+      "difficulty": "medium",
+      "category": "交渉"
+    },
+    "is_published": 1,
+    "created_at": "2025-11-07T00:00:00Z",
+    "updated_at": "2025-11-07T00:00:00Z",
+    "author_id": 101
+  },
+  {
+    "id": 8,
+    "title": "危機管理対応：大規模リコール",
+    "body": "主力製品に重大な欠陥が発見されました。広報対応、製品回収プロセス、および再発防止策を含む包括的な危機管理計画を立案せよ。",
+    "settings": {
+      "difficulty": "advanced",
+      "category": "危機管理"
+    },
+    "is_published": 1,
+    "created_at": "2025-11-08T00:00:00Z",
+    "updated_at": "2025-11-08T00:00:00Z",
+    "author_id": 105
+  },
+  {
+    "id": 9,
+    "title": "競合他社の動向分析",
+    "body": "主要な競合他社3社の最近の動向（新製品、M&A、マーケティング戦略）を分析し、自社への影響を評価してください。",
+    "settings": {
+      "difficulty": "easy",
+      "category": "分析"
+    },
+    "is_published": 1,
+    "created_at": "2025-11-09T00:00:00Z",
+    "updated_at": "2025-11-09T00:00:00Z",
+    "author_id": 102
+  },
+  {
+    "id": 10,
+    "title": "新プロジェクトの実行計画",
+    "body": "承認された新プロジェクトについて、詳細なマイルストーン、タスク割り当て、および予算計画を作成してください。",
+    "settings": {
+      "difficulty": "medium",
+      "category": "計画"
+    },
+    "is_published": 0,
+    "created_at": "2025-11-10T00:00:00Z",
+    "updated_at": "2025-11-10T00:00:00Z",
+    "author_id": 104
+  }
+]
