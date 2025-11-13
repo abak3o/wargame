@@ -13,82 +13,49 @@
  * "responseText": "Gemini からの応答テキスト"
  * }
  */
+
 export async function onRequestPost(context) {
   try {
-    // 1. 環境変数 (シークレット) から API キーを取得
-    //    'GEMINI_API_KEY' という名前でシークレットを設定する必要があります
-    const apiKey = context.env.GEMINI_API_KEY;
-
-    if (!apiKey) {
-      return new Response('API key not configured', { status: 500 });
-    }
-
-    // 2. フロントエンド (script.js) から送られてきた JSON を取得
-    const requestData = await context.request.json();
-    const userPrompt = requestData.prompt;
+    const requestData = await context.request.json().catch(() => ({}));
+    const userPrompt = requestData.prompt || '';
 
     if (!userPrompt) {
-      return new Response(JSON.stringify({ error: 'Prompt is required' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return new Response(JSON.stringify({ error: 'prompt is required' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
     }
 
-    // 3. Gemini API (v1beta) にリクエストを送信
-    const modelName = "gemini-2.5-flash";
-    const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+    const apiKey = context.env && context.env.GEMINI_API_KEY;
 
-    const geminiResponse = await fetch(geminiUrl, {
+    // If no API key, return a simple, deterministic echo so local development works.
+    if (!apiKey) {
+      const resp = { responseText: `（ローカルモード）受け取ったプロンプト: ${userPrompt}` };
+      return new Response(JSON.stringify(resp), { headers: { 'Content-Type': 'application/json' } });
+    }
+
+    // If API key exists, attempt to call Gemini (keep payload minimal). If that fails, return error.
+    const modelName = 'gemini-2.5-flash';
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+
+    const apiResp = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [{ text: userPrompt }],
-          },
-        ],
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contents: [{ parts: [{ text: userPrompt }] }] })
     });
 
-    if (!geminiResponse.ok) {
-      const errorText = await geminiResponse.text();
-      throw new Error(`Gemini API error: ${errorText}`);
+    if (!apiResp.ok) {
+      const t = await apiResp.text();
+      throw new Error('Gemini API error: ' + t);
     }
 
-    const geminiData = await geminiResponse.json();
+    const json = await apiResp.json();
+    const text = ((json && json.candidates && json.candidates[0] && json.candidates[0].content && json.candidates[0].content.parts && json.candidates[0].content.parts[0] && json.candidates[0].content.parts[0].text) || '').toString();
+    return new Response(JSON.stringify({ responseText: text }), { headers: { 'Content-Type': 'application/json' } });
 
-    // 4. Gemini の応答テキストを抽出
-    //    (注: Gemini のレスポンス構造は変更される可能性があるため、ドキュメントを確認してください)
-    const responseText = geminiData.candidates[0].content.parts[0].text;
-
-    // 5. フロントエンドに JSON 形式で応答を返す
-    //    script.js はこの responseText を受け取って表示する
-    const responsePayload = {
-      responseText: responseText,
-    };
-
-    return new Response(JSON.stringify(responsePayload), {
-      headers: { 'Content-Type': 'application/json' },
-    });
-
-  } catch (error) {
-    console.error(error);
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
+  } catch (err) {
+    console.error('api/gemini error:', err && err.message);
+    return new Response(JSON.stringify({ error: err && err.message }), { status: 500, headers: { 'Content-Type': 'application/json' } });
   }
 }
 
-// OPTIONS リクエストのハンドリング (CORS 用、ただし Advanced Mode では不要な場合も)
-export async function onRequestOptions(context) {
-  return new Response(null, {
-    headers: {
-      'Access-Control-Allow-Origin': '*', // 本番環境ではドメインを限定
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    },
-  });
+export async function onRequestOptions() {
+  return new Response(null, { headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' } });
 }

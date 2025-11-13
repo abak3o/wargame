@@ -1,0 +1,10 @@
+[
+  {
+    "id": 101,
+    "username": "taro",
+    "display_name": "Taro",
+    "email": null,
+    "role": "admin",
+    "created_at": "2025-10-28T09:00:00Z"
+  }
+]
