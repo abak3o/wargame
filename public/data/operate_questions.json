@@ -1,282 +1,62 @@
-[
-  {
+{
+  "1": {
     "id": 201,
-    "operate_id": 1,
-    "question_number": 1,
-    "content": "【1】利用可能なリソースをリストアップしてください。",
-    "correct_answer": null,
-    "score": 30
+    "content": "【1】利用可能なリソースをリストアップしてください。\n【2】最も優先度の高い脅威は何ですか？\n【3】初期の行動計画の概要を述べてください。",
+    "answer_template": "【1】\n\n【2】\n\n【3】\n\n",
+    "correct_answer": null
   },
-  {
-    "id": 202,
-    "operate_id": 1,
-    "question_number": 2,
-    "content": "【2】最も優先度の高い脅威は何ですか？",
-    "correct_answer": null,
-    "score": 40
-  },
-  {
-    "id": 203,
-    "operate_id": 1,
-    "question_number": 3,
-    "content": "【3】初期の行動計画の概要を述べてください。",
-    "correct_answer": null,
-    "score": 30
-  },
-  {
+  "2": {
     "id": 204,
-    "operate_id": 2,
-    "question_number": 1,
-    "content": "【1】敵軍の配置に関する主な情報源は何ですか？",
-    "correct_answer": null,
-    "score": 25
+    "content": "【1】敵軍の配置に関する主な情報源は何ですか？\n【2】敵の兵站能力における最大の弱点は何だと評価しますか？\n【3】敵が取りうる最も可能性の高い作戦行動は何ですか？\n【4】情報の信頼性をどのように評価しましたか？",
+    "answer_template": "【1】\n\n【2】\n\n【3】\n\n【4】\n\n",
+    "correct_answer": null
   },
-  {
-    "id": 205,
-    "operate_id": 2,
-    "question_number": 2,
-    "content": "【2】敵の兵站能力における最大の弱点は何だと評価しますか？",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
-    "id": 206,
-    "operate_id": 2,
-    "question_number": 3,
-    "content": "【3】敵が取りうる最も可能性の高い作戦行動は何ですか？",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
-    "id": 207,
-    "operate_id": 2,
-    "question_number": 4,
-    "content": "【4】情報の信頼性をどのように評価しましたか？",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
+  "3": {
     "id": 208,
-    "operate_id": 3,
-    "question_number": 1,
-    "content": "【1】分析対象のデータ期間と種類を明記してください。",
-    "correct_answer": null,
-    "score": 40
+    "content": "【1】分析対象のデータ期間と種類を明記してください。\n【2】特定された主要な市場トレンドを3つ挙げてください。\n【3】注目すべき異常値はありましたか？",
+    "answer_template": "【1】\n\n【2】\n\n【3】\n\n",
+    "correct_answer": null
   },
-  {
-    "id": 209,
-    "operate_id": 3,
-    "question_number": 2,
-    "content": "【2】特定された主要な市場トレンドを3つ挙げてください。",
-    "correct_answer": null,
-    "score": 30
-  },
-  {
-    "id": 210,
-    "operate_id": 3,
-    "question_number": 3,
-    "content": "【3】注目すべき異常値はありましたか？",
-    "correct_answer": null,
-    "score": 30
-  },
-  {
+  "4": {
     "id": 211,
-    "operate_id": 4,
-    "question_number": 1,
-    "content": "【1】計画の主要な戦略的目標（KPI）を3つ設定してください。",
-    "correct_answer": null,
-    "score": 20
+    "content": "【1】計画の主要な戦略的目標（KPI）を3つ設定してください。\n【2】リソース配分の優先順位を説明してください。\n【3】計画実行における最大のリスクは何ですか？\n【4】そのリスクに対する軽減策を提案してください。",
+    "answer_template": "【1】\n\n【2】\n\n【3】\n\n【4】\n\n",
+    "correct_answer": null
   },
-  {
-    "id": 212,
-    "operate_id": 4,
-    "question_number": 2,
-    "content": "【2】リソース配分の優先順位を説明してください。",
-    "correct_answer": null,
-    "score": 30
-  },
-  {
-    "id": 213,
-    "operate_id": 4,
-    "question_number": 3,
-    "content": "【3】計画実行における最大のリスクは何ですか？",
-    "correct_answer": null,
-    "score": 30
-  },
-  {
-    "id": 214,
-    "operate_id": 4,
-    "question_number": 4,
-    "content": "【4】そのリスクに対する軽減策を提案してください。",
-    "correct_answer": null,
-    "score": 20
-  },
-  {
+  "5": {
     "id": 215,
-    "operate_id": 5,
-    "question_number": 1,
-    "content": "【1】現在の物流ネットワークにおける主要なボトルネックを特定してください。",
-    "correct_answer": null,
-    "score": 30
+    "content": "【1】現在の物流ネットワークにおける主要なボトルネックを特定してください。\n【2】コスト削減のための具体的な提案をしてください。\n【3】提案する最適化案が配送時間に与える影響を予測してください。",
+    "answer_template": "【1】\n\n【2】\n\n【3】\n\n",
+    "correct_answer": null
   },
-  {
-    "id": 216,
-    "operate_id": 5,
-    "question_number": 2,
-    "content": "【2】コスト削減のための具体的な提案をしてください。",
-    "correct_answer": null,
-    "score": 40
-  },
-  {
-    "id": 217,
-    "operate_id": 5,
-    "question_number": 3,
-    "content": "【3】提案する最適化案が配送時間に与える影響を予測してください。",
-    "correct_answer": null,
-    "score": 30
-  },
-  {
+  "6": {
     "id": 218,
-    "operate_id": 6,
-    "question_number": 1,
-    "content": "【1】シナリオにおける倫理的な論点は何ですか？",
-    "correct_answer": null,
-    "score": 25
+    "content": "【1】シナリオにおける倫理的な論点は何ですか？\n【2】異なる利害関係者の視点を挙げてください。\n【3】功利主義的な観点からの是非を議論してください。\n【4】義務論的な観点からの是非を議論してください。",
+    "answer_template": "【1】\n\n【2】\n\n【3】\n\n【4】\n\n",
+    "correct_answer": null
   },
-  {
-    "id": 219,
-    "operate_id": 6,
-    "question_number": 2,
-    "content": "【2】異なる利害関係者の視点を挙げてください。",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
-    "id": 220,
-    "operate_id": 6,
-    "question_number": 3,
-    "content": "【3】功利主義的な観点からの是非を議論してください。",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
-    "id": 221,
-    "operate_id": 6,
-    "question_number": 4,
-    "content": "【4】義務論的な観点からの是非を議論してください。",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
+  "7": {
     "id": 222,
-    "operate_id": 7,
-    "question_number": 1,
-    "content": "【1】A国（自国）の交渉における最低限の要求（レッドライン）は何ですか？",
-    "correct_answer": null,
-    "score": 30
+    "content": "【1】A国（自国）の交渉における最低限の要求（レッドライン）は何ですか？\n【2】B国が受け入れ可能な妥協案を2つ提案してください。\n【3】交渉決裂の場合の次善策（BATNA）は何ですか？",
+    "answer_template": "【1】\n\n【2】\n\n【3】\n\n",
+    "correct_answer": null
   },
-  {
-    "id": 223,
-    "operate_id": 7,
-    "question_number": 2,
-    "content": "【2】B国が受け入れ可能な妥協案を2つ提案してください。",
-    "correct_answer": null,
-    "score": 40
-  },
-  {
-    "id": 224,
-    "operate_id": 7,
-    "question_number": 3,
-    "content": "【3】交渉決裂の場合の次善策（BATNA）は何ですか？",
-    "correct_answer": null,
-    "score": 30
-  },
-  {
+  "8": {
     "id": 225,
-    "operate_id": 8,
-    "question_number": 1,
-    "content": "【1】最初に行うべき広報対応（ステークホルダー別）を策定してください。",
-    "correct_answer": null,
-    "score": 25
+    "content": "【1】最初に行うべき広報対応（ステークホルダー別）を策定してください。\n【2】効率的な製品回収プロセスの概要を設計してください。\n【3】根本的な原因を特定し、再発防止策を立案してください。\n【4】短期的な財務的影響とブランドイメージへの影響を評価してください。",
+    "answer_template": "【1】\n\n【2】\n\n【3】\n\n【4】\n\n",
+    "correct_answer": null
   },
-  {
-    "id": 226,
-    "operate_id": 8,
-    "question_number": 2,
-    "content": "【2】効率的な製品回収プロセスの概要を設計してください。",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
-    "id": 227,
-    "operate_id": 8,
-    "question_number": 3,
-    "content": "【3】根本的な原因を特定し、再発防止策を立案してください。",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
-    "id": 228,
-    "operate_id": 8,
-    "question_number": 4,
-    "content": "【4】短期的な財務的影響とブランドイメージへの影響を評価してください。",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
+  "9": {
     "id": 229,
-    "operate_id": 9,
-    "question_number": 1,
-    "content": "【1】競合他社3社の最近の主要な動向を要約してください。",
-    "correct_answer": null,
-    "score": 40
+    "content": "【1】競合他社3社の最近の主要な動向を要約してください。\n【2】これらの動向が自社の市場シェアに与える短期的な影響を予測してください。\n【3】自社が取るべき対抗策を提案してください。",
+    "answer_template": "【1】\n\n【2】\n\n【3】\n\n",
+    "correct_answer": null
   },
-  {
-    "id": 230,
-    "operate_id": 9,
-    "question_number": 2,
-    "content": "【2】これらの動向が自社の市場シェアに与える短期的な影響を予測してください。",
-    "correct_answer": null,
-    "score": 30
-  },
-  {
-    "id": 231,
-    "operate_id": 9,
-    "question_number": 3,
-    "content": "【3】自社が取るべき対抗策を提案してください。",
-    "correct_answer": null,
-    "score": 30
-  },
-  {
+  "10": {
     "id": 232,
-    "operate_id": 10,
-    "question_number": 1,
-    "content": "【1】プロジェクトの主要なマイルストーンと期限を設定してください。",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
-    "id": 233,
-    "operate_id": 10,
-    "question_number": 2,
-    "content": "【2】主要タスクごとの担当部門（または担当者）を割り当ててください。",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
-    "id": 234,
-    "operate_id": 10,
-    "question_number": 3,
-    "content": "【3】詳細な予算計画（内訳）を作成してください。",
-    "correct_answer": null,
-    "score": 25
-  },
-  {
-    "id": 235,
-    "operate_id": 10,
-    "question_number": 4,
-    "content": "【4】プロジェクトの進捗を測定するための主要指標（KPI）を定めてください。",
-    "correct_answer": null,
-    "score": 25
+    "content": "【1】プロジェクトの主要なマイルストーンと期限を設定してください。\n【2】主要タスクごとの担当部門（または担当者）を割り当ててください。\n【3】詳細な予算計画（内訳）を作成してください。\n【4】プロジェクトの進捗を測定するための主要指標（KPI）を定めてください。",
+    "answer_template": "【1】\n\n【2】\n\n【3】\n\n【4】\n\n",
+    "correct_answer": null
   }
-]
+}

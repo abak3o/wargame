@@ -33,7 +33,8 @@ export async function onRequest(context) {
 
     if (qRes && qRes.ok) {
       const q = await qRes.json();
-      questions = Array.isArray(q) ? q : Object.values(q || {});
+      // 新しい構造: { "1": {...}, "2": {...} }
+      questions = q;
     }
 
     if (templateRes && templateRes.ok) {
@@ -56,27 +57,15 @@ export async function onRequest(context) {
     };
   }
 
-  // filter questions to only those that match this article's id/slug/external id
-  const keys = [
-    article && article.id,
-    article && article.slug,
-    article && article.external_id,
-  ]
-    .filter(Boolean)
-    .map(String);
-  const filtered = (questions || []).filter((q) => {
-    const qOperateId = q && q.operate_id != null ? String(q.operate_id) : null;
-    const qExternal =
-      q && q.operate_external_id != null ? String(q.operate_external_id) : null;
-    return (
-      (qOperateId && keys.includes(qOperateId)) ||
-      (qExternal && keys.includes(qExternal))
-    );
-  });
+  // Get questions for this operate_id
+  const operateQuestions =
+    questions && questions[String(article.id)]
+      ? questions[String(article.id)]
+      : null;
 
   const html = template
-    ? renderTemplate(template, article, filtered || [])
-    : buildPageHtml(article, filtered || []);
+    ? renderTemplate(template, article, operateQuestions)
+    : buildPageHtml(article, operateQuestions);
 
   return new Response(html, {
     headers: { "Content-Type": "text/html; charset=utf-8" },
@@ -92,10 +81,17 @@ function escapeHtml(s) {
     .replace(/'/g, "&#039;");
 }
 
+// Escape HTML and convert newlines to <br>
+function escapeHtmlWithBreaks(s) {
+  return escapeHtml(s).replace(/\n/g, "<br>");
+}
+
 // Render template with placeholders
-function renderTemplate(template, article, questions) {
-  const questionsHtml = buildQuestionsListHtml(questions);
-  const initialAnswer = buildInitialAnswerText(questions);
+function renderTemplate(template, article, questionData) {
+  const questionsHtml = questionData
+    ? escapeHtmlWithBreaks(questionData.content || "")
+    : "<p>設問はありません。</p>";
+  const initialAnswer = questionData ? questionData.answer_template || "" : "";
 
   return template
     .replace(/\{\{TITLE\}\}/g, escapeHtml(article.title || "No Title"))
@@ -105,65 +101,14 @@ function renderTemplate(template, article, questions) {
     .replace(/\{\{INITIAL_ANSWER\}\}/g, initialAnswer);
 }
 
-// Build questions list HTML (without answer textareas)
-function buildQuestionsListHtml(questions) {
-  if (!questions || questions.length === 0) {
-    return "<p>設問はありません。</p>";
-  }
-
-  return questions
-    .map(
-      (q) => `
-      <div class="question-item" data-qid="${escapeHtml(q.id)}">
-        <h3>問題 ${escapeHtml(q.question_number || "")}</h3>
-        <div class="question-content">${escapeHtml(q.content || "")}</div>
-      </div>
-    `
-    )
-    .join("\n");
-}
-
-// Build initial answer text with question templates
-function buildInitialAnswerText(questions) {
-  if (!questions || questions.length === 0) {
-    return "";
-  }
-
-  return questions
-    .map((q) => {
-      const qNum = q.question_number || "";
-      return `【${qNum}】\n\n`;
-    })
-    .join("\n");
-}
-
-// Build questions HTML (for fallback)
-function buildQuestionsHtml(questions) {
-  if (!questions || questions.length === 0) {
-    return "<p>設問はありません。</p>";
-  }
-
-  return questions
-    .map(
-      (q) => `
-      <section class="question" data-qid="${escapeHtml(q.id)}">
-        <h3>問題 ${escapeHtml(q.question_number || "")}</h3>
-        <div class="question-content">${escapeHtml(q.content || "")}</div>
-        <label for="q_${escapeHtml(q.id)}" class="sr-only">回答欄</label>
-        <textarea 
-          id="q_${escapeHtml(q.id)}" 
-          placeholder="こちらに回答を入力してください..."
-          aria-label="問題${escapeHtml(q.question_number || "")}の回答"
-        ></textarea>
-      </section>
-    `
-    )
-    .join("\n");
-}
+// These functions are kept for backward compatibility but simplified for new structure
 
 // Fallback: build HTML inline if template is not available
-function buildPageHtml(article, questions) {
-  const qsHtml = buildQuestionsHtml(questions);
+function buildPageHtml(article, questionData) {
+  const qsHtml = questionData
+    ? escapeHtmlWithBreaks(questionData.content || "")
+    : "<p>設問はありません。</p>";
+  const initialAnswer = questionData ? questionData.answer_template || "" : "";
 
   const html = `<!doctype html>
 <html lang="ja">
@@ -181,7 +126,19 @@ function buildPageHtml(article, questions) {
     <article class="body">${article.body || ""}</article>
 
     <h2>設問</h2>
-    ${qsHtml}
+    <div class="questions-list">
+      <div class="question-content">${qsHtml}</div>
+    </div>
+
+    <h2>回答欄</h2>
+    <div class="answer-section">
+      <label for="answer-area" class="sr-only">全問題の回答</label>
+      <textarea 
+        id="answer-area" 
+        placeholder="こちらに全ての問題の回答を入力してください..."
+        aria-label="全問題の回答欄"
+      >${initialAnswer}</textarea>
+    </div>
 
     <div class="submit-section">
       <p><button id="submit-answers">回答を送信する</button></p>
