@@ -1,0 +1,87 @@
+/* Basic page layout */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial;
+  line-height: 1.45;
+  color: #1a202c;
+  background: #f7fafc;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  max-width: 980px;
+  margin: 28px auto;
+  padding: 0 16px;
+}
+
+/* Card list */
+#cards-container {
+  /* Display cards in a single vertical column */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.card {
+  display: block;
+  background: #ffffff;
+  border: 1px solid #e6eef6;
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 6px 20px rgba(2, 6, 23, 0.04);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 120ms ease, box-shadow 120ms ease,
+    border-color 120ms ease;
+}
+
+.card:hover,
+.card:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.08);
+  border-color: #cde3ff;
+}
+
+.card {
+  display: block;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e6eef6;
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 6px 20px rgba(2, 6, 23, 0.04);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 120ms ease, box-shadow 120ms ease,
+    border-color 120ms ease;
+}
+
+.card .excerpt {
+  margin-top: 6px;
+  color: #334155;
+  font-size: 0.95rem;
+  min-height: 2.4em;
+}
+
+/* Accessibility: focus outline for keyboard users */
+.card:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.25);
+  outline-offset: 2px;
+}
+
+/* Small screens tweaks */
+@media (max-width: 520px) {
+  main {
+    padding: 0 12px;
+  }
+  .card {
+    padding: 12px;
+  }
+}
+
+/* Utility */
+.error {
+  color: #b91c1c;
+}
