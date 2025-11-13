@@ -1,0 +1,243 @@
+/* Operate page specific styles */
+
+.article-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.article-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 12px;
+}
+
+.article-container .meta {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+.article-container .body {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 32px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  min-height: 300px;
+  font-size: 1rem;
+}
+
+/* Questions section */
+.article-container h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 20px;
+  padding-top: 16px;
+  border-top: 2px solid #e2e8f0;
+}
+
+/* Questions list (問題文のみ) */
+.questions-list {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.question-item {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.question-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.question-item h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 12px;
+}
+
+.question-content {
+  color: #475569;
+  line-height: 1.8;
+  font-size: 1rem;
+  white-space: pre-wrap;
+}
+
+/* Answer section (1つの大きな回答欄) */
+.answer-section {
+  margin-bottom: 24px;
+}
+
+.answer-section textarea {
+  width: 100%;
+  min-height: 400px;
+  padding: 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+  background: #ffffff;
+}
+
+.answer-section textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Legacy question style (for fallback) */
+.question {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.question h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 12px;
+}
+
+.question textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.question textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Submit section */
+.submit-section {
+  margin-top: 32px;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.submit-section button {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submit-section button:hover {
+  background: #2563eb;
+}
+
+.submit-section button:active {
+  background: #1d4ed8;
+}
+
+.submit-section button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+#form-result {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+#form-result:empty {
+  display: none;
+}
+
+#form-result.success {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+#form-result.error {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+/* Navigation */
+.article-container > p:last-child {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.article-container > p:last-child a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.article-container > p:last-child a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .article-container {
+    padding: 16px 12px;
+  }
+
+  .article-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .article-container .body {
+    padding: 16px;
+  }
+
+  .question {
+    padding: 16px;
+  }
+}
